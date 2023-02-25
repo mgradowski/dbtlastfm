@@ -1,0 +1,6 @@
+version: 2
+
+
+models:
+  - name: stg_imgw__stations
+  - name: stg_imgw__climate
