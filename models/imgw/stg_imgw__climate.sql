@@ -4,6 +4,7 @@ select
     "year",
     "month",
     "day",
+    "hour",
     "air_temperature",
     "air_temperature_status_indicator",
     "wet_bulb_temperature",
