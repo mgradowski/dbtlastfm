@@ -4,7 +4,7 @@ select
     "short_code",
 from
     read_csv(
-        "../rawdata/imgw/stations/*.csv",
+        "rawdata/imgw/stations/*.csv",
         columns = {
             'full_code': 'varchar',
             'name': 'varchar',

@@ -1,2 +1,4 @@
-logs/
 *.duckdb
+dbt_packages/
+logs/
+target/

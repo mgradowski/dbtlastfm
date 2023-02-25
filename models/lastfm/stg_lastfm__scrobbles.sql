@@ -5,7 +5,7 @@ select
     "time"
 from
     read_csv(
-        "../rawdata/lastfm/*.csv",
+        "rawdata/lastfm/*.csv",
         columns = {
             'artist': 'varchar',
             'album': 'varchar',

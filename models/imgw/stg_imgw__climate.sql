@@ -22,7 +22,7 @@ select
     "visibility_status_indicator"
 from
     read_csv(
-        "../rawdata/imgw/climate/*.csv",
+        "rawdata/imgw/climate/*.csv",
         columns = {
             'station_full_code': 'varchar',
             'station_name': 'varchar',
