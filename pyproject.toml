@@ -9,6 +9,8 @@ python = "^3.9"
 dbt-core = "^1.4.3"
 dbt-duckdb = "^1.4.0"
 duckdb = "^0.7.0"
+pandas = "^1.5.3"
+workalendar = "^17.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.1.0"

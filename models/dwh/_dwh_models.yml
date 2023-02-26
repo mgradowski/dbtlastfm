@@ -1,0 +1,80 @@
+version: 2
+
+
+models:
+  - name: d_album
+    columns:
+      - name: pk_album
+        tests:
+          - unique
+          - not_null
+      - name: fk_artist
+        tests:
+          - not_null
+          - relationships:
+              to: ref("d_artist")
+              field: pk_artist
+
+  - name: d_artist
+    columns:
+      - name: pk_artist
+        tests:
+          - unique
+          - not_null
+
+  - name: d_calendar
+    columns:
+      - name: pk_date
+        tests:
+          - unique
+          - not_null
+      - name: calendar_date
+        tests:
+          - unique
+          - not_null
+      - name: is_working_day
+        tests:
+          - not_null
+
+  - name: d_track
+    columns:
+      - name: pk_track
+        tests:
+          - unique
+          - not_null
+      - name: fk_artist
+        tests:
+          - not_null
+          - relationships:
+              to: ref("d_artist")
+              field: pk_artist
+
+  - name: f_playback
+    columns:
+      - name: fk_artist
+        tests:
+          - not_null
+          - relationships:
+              to: ref("d_artist")
+              field: pk_artist
+      - name: fk_album
+        tests:
+          - not_null
+          - relationships:
+              to: ref("d_album")
+              field: pk_album
+      - name: fk_track
+        tests:
+          - not_null
+          - relationships:
+              to: ref("d_track")
+              field: pk_track
+      - name: fk_date
+        tests:
+          - not_null
+          - relationships:
+              to: ref("d_calendar")
+              field: pk_date
+      - name: playback_timestamp
+        tests:
+          - not_null

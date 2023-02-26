@@ -14,3 +14,5 @@ from
         },
         timestampformat='%-d %b %Y %H:%M'
     )
+where
+    extract(year from "time") between 2020 and 2022
