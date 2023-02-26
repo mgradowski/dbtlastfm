@@ -1,21 +1,40 @@
-from datetime import date
+from datetime import date, datetime
 
-from pandas import DataFrame, date_range
+from pandas import DataFrame, date_range, offsets
 from workalendar.europe import Poland
+from operator import attrgetter
 
 
 DATE_MIN = date(2020, 1, 1)
 DATE_MAX = date(2022, 12, 31)
 CAL = Poland()
 
+def _fmt_isoweek(dt: datetime) -> str:
+    year, week, _ = dt.isocalendar()
+    return f"{year}W{week:02d}"
+
 
 def model(dbt, session) -> DataFrame:
     return DataFrame.from_dict(
-        data={"calendar_date": date_range(DATE_MIN, DATE_MAX)}
+        data={"date_day": date_range(DATE_MIN, DATE_MAX).to_series()}
     ).assign(
         pk_date=lambda df: df.eval(
-            "calendar_date.dt.year * 10000 + calendar_date.dt.month * 100 + calendar_date.dt.day"
+            "date_day.dt.year * 10000 + date_day.dt.month * 100 + date_day.dt.day"
         ),
-        calendar_date=lambda df: df.calendar_date.dt.date,
-        is_working_day=lambda df: df.calendar_date.apply(CAL.is_working_day),
-    )[["pk_date", "calendar_date", "is_working_day"]] # Reorder columns
+        date_week=lambda df: df.date_day.apply(_fmt_isoweek),
+        date_month=lambda df: df.date_day.dt.strftime("%Y-%m"),
+        date_quarter=lambda df: df.date_day.apply(lambda dt: f"{dt.year}Q{dt.month//4+1}"),
+        date_year=lambda df: df.date_day.dt.year.astype("string"),
+        date_day=lambda df: df.date_day.dt.date,
+        is_working_day=lambda df: df.date_day.apply(CAL.is_working_day),
+    )[
+        [
+            "pk_date",
+            "date_day",
+            "date_week",
+            "date_month",
+            "date_quarter",
+            "date_year",
+            "is_working_day",
+        ]
+    ]  # Reorder columns

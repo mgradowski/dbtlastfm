@@ -13,6 +13,14 @@ snapshot-paths: ["snapshots"]
 
 vars:
   weather_station_name: "GDAŃSK-RĘBIECHOWO"
+  dbt_metrics_calendar_model: d_calendar
+  custom_calendar_dimension_list:
+    - is_workday
+
+models:
+  # disable the default dbt_metrics calendar
+  metrics:
+    +enabled: false
 
 target-path: "target"
 clean-targets:
