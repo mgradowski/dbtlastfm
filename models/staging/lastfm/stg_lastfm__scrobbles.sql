@@ -9,8 +9,7 @@ select
     cast(scrobbles.playback_timestamp as date) as playback_date,
     scrobbles.playback_timestamp,
     row_number() over () as _scrobbleid
-from
-    {{ source("lastfm", "scrobbles") }} scrobbles
+from {{ source("lastfm", "scrobbles") }} scrobbles
 left join
     {{ ref("mdm_artist_dedup") }} mdm_artist_dedup
     on mdm_artist_dedup.bad_artist_name = scrobbles.raw_artist_name
