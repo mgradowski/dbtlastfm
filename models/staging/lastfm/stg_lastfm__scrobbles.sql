@@ -4,7 +4,7 @@ select
     track_title,
     cast(playback_timestamp as date) as playback_date,
     playback_timestamp,
-    row_number() over() as _scrobbleid
+    row_number() over () as _scrobbleid
 from
     read_csv(
         "rawdata/lastfm/*.csv",
