@@ -1,0 +1,33 @@
+version: 2
+
+seeds:
+  - name: mdm_artist_dedup
+    config:
+      column_types:
+        bad_artist_name: varchar
+        good_artist_name: varchar
+    columns:
+      - name: bad_artist_name
+        tests:
+          - not_null
+          - unique
+      - name: good_artist_name
+        tests:
+          - not_null
+
+  - name: mdm_track_dedup
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - artist_name
+            - bad_track_title
+    columns:
+      - name: artist_name
+        tests:
+          - not_null
+      - name: bad_track_title
+        tests:
+          - not_null
+      - name: good_track_title
+        tests:
+          - not_null
