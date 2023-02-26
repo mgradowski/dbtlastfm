@@ -1,21 +1,16 @@
 select
-    coalesce(mdm_artist_dedup.good_artist_name, scrobbles.raw_artist_name) as artist_name,
+    coalesce(
+        mdm_artist_dedup.good_artist_name, scrobbles.raw_artist_name
+    ) as artist_name,
     scrobbles.album_title,
-    coalesce(mdm_track_dedup.good_track_title, scrobbles.raw_track_title) as track_title,
+    coalesce(
+        mdm_track_dedup.good_track_title, scrobbles.raw_track_title
+    ) as track_title,
     cast(scrobbles.playback_timestamp as date) as playback_date,
     scrobbles.playback_timestamp,
     row_number() over () as _scrobbleid
 from
-    read_csv(
-        "rawdata/lastfm/*.csv",
-        columns = {
-            'raw_artist_name':'varchar',
-            'album_title':'varchar',
-            'raw_track_title':'varchar',
-            'playback_timestamp':'timestamp'
-        },
-        timestampformat = '%-d %b %Y %H:%M'
-    ) scrobbles
+    {{ source("lastfm", "scrobbles") }} scrobbles
 left join
     {{ ref("mdm_artist_dedup") }} mdm_artist_dedup
     on mdm_artist_dedup.bad_artist_name = scrobbles.raw_artist_name

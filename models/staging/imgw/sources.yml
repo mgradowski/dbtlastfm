@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: imgw
+    schema: rawdata_imgw
+
+    tables:
+      - name: climate
+      - name: stations

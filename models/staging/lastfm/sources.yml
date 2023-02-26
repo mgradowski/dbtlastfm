@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: lastfm
+    schema: rawdata_lastfm
+
+    tables:
+      - name: scrobbles
