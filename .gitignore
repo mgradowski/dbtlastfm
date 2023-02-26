@@ -1,4 +1,5 @@
 *.duckdb
 dbt_packages/
+findings.txt
 logs/
 target/
