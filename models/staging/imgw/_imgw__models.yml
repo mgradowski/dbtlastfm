@@ -4,3 +4,10 @@ version: 2
 models:
   - name: stg_imgw__stations
   - name: stg_imgw__climate
+    columns:
+      - name: station_full_code
+        tests:
+          - not_null
+          - relationships:
+              to: ref("stg_imgw__stations")
+              field: full_code

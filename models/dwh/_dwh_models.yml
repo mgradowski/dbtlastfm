@@ -50,6 +50,9 @@ models:
               field: pk_artist
 
   - name: f_playback
+    tests:
+      - dbt_utils.equal_rowcount:
+          compare_model: ref('stg_lastfm__scrobbles')
     columns:
       - name: fk_artist
         tests:

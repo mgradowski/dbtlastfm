@@ -11,6 +11,9 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
+vars:
+  weather_station_name: "GDAŃSK-RĘBIECHOWO"
+
 target-path: "target"
 clean-targets:
   - "target"
