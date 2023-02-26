@@ -16,6 +16,7 @@ workalendar = "^17.0.0"
 black = "^23.1.0"
 ruff = "^0.0.252"
 vermin = "^1.5.1"
+shandy-sqlfmt = {extras = ["jinjafmt"], version = "^0.17.0"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
