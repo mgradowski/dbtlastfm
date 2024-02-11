@@ -6,10 +6,10 @@ authors = ["Mikołaj Gradowski <mikolaj.gradowski@hotmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-dbt-core = "^1.4.3"
-dbt-duckdb = "^1.4.0"
-duckdb = "^0.7.0"
-pandas = "^1.5.3"
+dbt-core = "^1.7.0"
+dbt-duckdb = "^1.7.0"
+duckdb = "^0.8.0"
+pandas = ">=2.0.0,<2.1.0"
 workalendar = "^17.0.0"
 
 [tool.poetry.dev-dependencies]
