@@ -1,15 +1,9 @@
 {{ config(materialized="table") }}
 
-select *
-from
-    {{
-        metrics.calculate(
-            [
-                metric("playback_count"),
-                metric("discovery_date"),
-                metric("days_known"),
-                metric("playback_frequency"),
-            ],
-            dimensions=["fk_track"],
-        )
-    }}
+select
+    f_playback.fk_track,
+    count(*) as playback_count,
+    min(playback_timestamp) as discovery_date,
+    max(playback_timestamp) as last_playback,
+from {{ ref("f_playback") }}
+group by f_playback.fk_track
