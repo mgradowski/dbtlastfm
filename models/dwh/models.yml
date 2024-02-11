@@ -2,10 +2,6 @@ version: 2
 
 
 models:
-  - name: af_monthly_playback_stats
-
-  - name: af_yearly_stats
-
   - name: d_album
     columns:
       - name: pk_album
