@@ -1,13 +1,12 @@
 from datetime import date, datetime
 
-from pandas import DataFrame, date_range, offsets
+from pandas import DataFrame, date_range
 from workalendar.europe import Poland
-from operator import attrgetter
-
 
 DATE_MIN = date(2020, 1, 1)
-DATE_MAX = date(2022, 12, 31)
+DATE_MAX = date(2024, 12, 31)
 CAL = Poland()
+
 
 def _fmt_isoweek(dt: datetime) -> str:
     year, week, _ = dt.isocalendar()
@@ -15,7 +14,7 @@ def _fmt_isoweek(dt: datetime) -> str:
 
 
 def model(dbt, session) -> DataFrame:
-    return DataFrame.from_dict(
+    return DataFrame.from_dict(  # type: ignore
         data={"date_day": date_range(DATE_MIN, DATE_MAX).to_series()}
     ).assign(
         pk_date=lambda df: df.eval(
@@ -23,7 +22,9 @@ def model(dbt, session) -> DataFrame:
         ),
         date_week=lambda df: df.date_day.apply(_fmt_isoweek),
         date_month=lambda df: df.date_day.dt.strftime("%Y-%m"),
-        date_quarter=lambda df: df.date_day.apply(lambda dt: f"{dt.year}Q{dt.month//4+1}"),
+        date_quarter=lambda df: df.date_day.apply(
+            lambda dt: f"{dt.year}Q{dt.month//4+1}"
+        ),
         date_year=lambda df: df.date_day.dt.year.astype("string"),
         date_day=lambda df: df.date_day.dt.date,
         is_working_day=lambda df: df.date_day.apply(CAL.is_working_day),
