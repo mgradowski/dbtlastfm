@@ -1,0 +1,8 @@
+dbtlastfm:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ./dbtlastfm.duckdb
+      schema: dbtlastfm_dev
+      threads: 4
