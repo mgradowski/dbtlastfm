@@ -5,4 +5,4 @@ dbtlastfm:
       type: duckdb
       path: ./dbtlastfm.duckdb
       schema: dbtlastfm_dev
-      threads: 4
+      threads: 12
