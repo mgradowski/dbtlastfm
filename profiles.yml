@@ -3,6 +3,6 @@ dbtlastfm:
   outputs:
     dev:
       type: duckdb
-      path: ./dbtlastfm.duckdb
+      path: target/dbtlastfm.duckdb
       schema: dbtlastfm_dev
       threads: 12

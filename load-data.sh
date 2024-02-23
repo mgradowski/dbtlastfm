@@ -2,8 +2,8 @@
 
 set -e
 
-
-duckdb -echo dbtlastfm.duckdb <<-EOSQL
+mkdir -p target
+duckdb -echo target/dbtlastfm.duckdb <<-EOSQL
     create schema if not exists rawdata_lastfm;
 
     create or replace table rawdata_lastfm.scrobbles as
